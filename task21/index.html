@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task21</title>
+    <style>
+        .wraper{width: 960px;margin: 0 auto;}
+        .wraper p{margin:5px 0;}
+        #alert{height:30px;line-height: 30px;color: #f00;}
+        #tag-list, #hobby-list{padding:10px 5px;}
+        #tag-list span,#hobby-list span{display: inline-block;min-width: 100px;line-height:100px;background-color:#f4e7b9;margin:0px 10px;word-wrap:break-word;word-break: break-all;text-align: center;border-radius: 100%;}
+        #hobby-list span strong{color: red;}
+    </style>
+</head>
+<body>
+    <div class="wraper">
+        <div id="alert">tag和爱好最多添加10个爱好，超过的话会把之前添加的挤掉哦，点击相应项即可删除</div>
+        <input type="text" placeholder="在此输入tag">
+        <p>Tags：</p>
+        <div id="tag-list"></div>
+        <textarea cols="32" rows="6">HTML,CSS、JavaScript，前端 jQuery Bootatrap; nodejs</textarea>
+        <button>确认爱好</button>
+        <p>爱好：</p>
+        <div id="hobby-list"></div>
+        <div>
+            <input id="search-input" type="text" placeholder="eg. HTML">
+            <input id="search-btn" type="button" value="搜索爱好">
+        </div>
+    </div>
+    <script src="task21.js"></script>  
+</body>
+</html>

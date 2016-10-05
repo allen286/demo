@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>剪刀石头布</title>
+	<link rel="stylesheet" href="css/game1.css" > 
+</head>
+<body>
+	<div id="wrap">
+		<h1>人机游戏——剪刀石头布</h1>
+		<h2>请选择下面的图片出拳</h2>
+		<div id="selection">
+			<img id="jiandao" src="images/jiandao.jpg">
+			<img id="shitou" src="images/shitou.jpg">
+			<img id="bu" src="images/bu.jpg">
+		</div>
+		<div id="result">
+			<h3>游戏结果栏</h3>
+			<p>左侧为玩家出拳结果，右侧为电脑出拳结果</p>
+			<img id="my-result" src="">
+			<span id="final-result"></span>
+			<img id="com-result" src="">
+		</div>
+		<div id="count">
+			<h3>结果统计</h3>
+			<p>您总共玩了<span id="total-num">0</span>次</p>
+			<p>您累计赢了<span id="win-num">0</span>次</p>
+			<p>您累计输了<span id="lose-num">0</span>次</p>
+			<p>累计平局有<span id="tie-num">0</span>次</p>
+		</div>
+	</div>
+
+<script src="js/guess.js"></script>
+</body>
+</html>
