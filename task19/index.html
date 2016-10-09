@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task19-sort</title>
+    <style type="text/css">
+        input{
+            margin-top: 10px;
+        }
+        body{
+            text-align: center;
+        }
+        #wrap {
+            width: 100%;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        #wrap span{
+            display: block;
+            width: 16px;
+            color: #fff;
+            background-color: #f00;
+            margin: 2px;
+        }
+    </style>
+</head>
+<body>
+    <p>输入1-300之间的数字来添加方块，数字代表方块高度（单位：px）</p>
+    <input type="text" id="num-input">
+    <input type="button" value="左侧入">
+    <input type="button" value="右侧入">
+    <input type="button" value="左侧出" style="margin-left: 30px;">
+    <input type="button" value="右侧出">
+    <br>
+    <input type="button" value="初始化">
+    <input type="button" value="冒泡排序">
+    <input type="button" value="选择排序">
+    <input type="button" value="快速排序">
+
+    <div id="wrap"></div>
+
+    <script src="task19.js"></script>
+</body>
+</html>
