@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task23</title>       
+    <style>
+        body{
+            text-align:center;
+            padding-top: 30px;
+        }
+        #tree{
+            width: 90%;
+            min-width: 960px;
+            height: 300px;
+            margin: 30px auto;
+        }
+        div{
+            box-sizing: border-box;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: center;
+            margin:20px 8px;
+            flex: 1;
+            border: 2px solid #000;
+            transition: background-color 600ms;
+            background-color: #fff;
+        }
+        #tree :nth-child(1){
+            flex: 10;
+        }
+        #tree :nth-child(2){
+            flex: 1;
+        }
+        #tree :nth-child(3){
+            flex: 1;
+        }        
+    </style>
+</head>
+<body>
+    <button>深度优先遍历</button>
+    <button>广度优先遍历</button>
+    <input type="text" placeholder="search">
+    <button>深度优先搜索</button>
+    <button>广度优先搜索</button>
+    <div id="tree">root
+        <div>animal
+            <div>pig
+                <div>dog
+                    <div>fish
+                         <div>chicken</div>
+                         <div>bird</div>
+                    </div>
+                    <div>shark
+                    </div>
+                </div>
+                <div>dogshit</div>
+                <div>dogtail</div>
+            </div>
+            <div>pigshit
+                <div>xxx
+                    <div>ooo</div>
+                </div>     
+            </div>
+            <div>pigtail
+                <div>hhh</div>
+                
+            </div>
+        </div>
+        <div>fruit
+            <div>apple</div>
+            <div>banana</div>
+        </div>
+        <div>papapa
+        </div>
+    </div>
+    <script type="text/javascript" src="task23.js"></script>
+</body>
+</html>
