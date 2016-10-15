@@ -65,11 +65,11 @@ function pushNum(func) {
         alert('请输入1-300之间的整数');
         return;
     }
-    if (queue.str.length>=60) {
+    if (queue.str.length >= 60) {
         alert('最多允许添加60个，已经满了哦，请删除一些后再添加');
         return;
     }
-    func.call(queue, inputNum); 
+    func.call(queue, inputNum);
 }
 
 //为四个按钮绑定事件侦听函数
@@ -156,6 +156,17 @@ function selectSort(arr) {
         arr[cur] = temp;
     }
 }
+// 插入排序
+function insertSort(arr) {
+    for (var i = 1; i < arr.length; i++) {
+        var toCmp = arr[i];
+        for (var j = i; j > 0 & toCmp < arr[j - 1]; j--) {
+            arr[j] = arr[j - 1];
+        }
+        arr[j] = toCmp;
+    }
+    return arr;
+}
 
 // 冒泡排序动画版：相邻两两比较，值大的换到后面，元素向上移动至正确的顺序，像冒泡一样
 function animateBubbleSort(arr) {
@@ -166,7 +177,7 @@ function animateBubbleSort(arr) {
         j = 1,
         temp = 0,
         len = arr.length;
-    timer = setInterval(run, 10);
+    timer = setInterval(run, 20);
 
     function run() {
         if (i < len) {
@@ -199,7 +210,7 @@ function animateSelectSort(arr) {
         j = 1,
         temp = 0,
         len = arr.length;
-    timer = setInterval(run, 10);
+    timer = setInterval(run, 20);
 
     function run() {
         if (i < len) {
@@ -214,6 +225,39 @@ function animateSelectSort(arr) {
             } else {
                 i++;
                 j = i + 1;
+            }
+        } else {
+            clearInterval(timer);
+            timer = null;
+            return;
+        }
+    }
+}
+
+//插入排序动画版
+function animateInsertSort(arr) {
+    if (timer) {
+        return;
+    }
+    var i = 1,
+        j = i,
+        temp = 0,
+        len = arr.length;
+    timer = setInterval(run, 20);
+
+    function run() {
+        if (i < len) {
+            if (j > 0) {
+                if (arr[j] < arr[j - 1]) {
+                    temp = arr[j - 1];
+                    arr[j - 1] = arr[j];
+                    arr[j] = temp;
+                    queue.display();
+                }
+                j--;
+            } else {
+                i++;
+                j = i;
             }
         } else {
             clearInterval(timer);
@@ -239,6 +283,11 @@ addEvent(btnList[7], 'click', function() {
     selectSort(queue.str);
     queue.display();
 });
+// 插入排序无动画版本
+addEvent(btnList[8], 'click', function() {
+    insertSort(queue.str);
+    queue.display();
+});
 */
 
 addEvent(btnList[5], 'click', function() {
@@ -251,12 +300,15 @@ addEvent(btnList[6], 'click', function() {
 addEvent(btnList[7], 'click', function() {
     animateSelectSort(queue.str);
 });
+addEvent(btnList[8], 'click', function() {
+    animateInsertSort(queue.str);
+});
 
 //随机数来初始化队列
 function initQueue() {
     clearInterval(timer);
     timer = null;
-    queue.str=[];
+    queue.str = [];
     for (var i = 0; i < 30; i++) {
         queue.str[i] = Math.floor((Math.random() * 300) + 1);
     }
