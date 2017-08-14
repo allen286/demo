@@ -1,0 +1,20 @@
+div {
+  box-sizing: border-box;
+}
+
+#wrapBox {
+  width: 100%;
+  height: 600px;
+  border: 1px solid black;
+  position: relative;
+}
+
+#dragBox {
+  width: 100px;
+  height: 100px;
+  background-color: black;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  cursor: move;
+}

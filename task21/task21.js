@@ -46,7 +46,8 @@ function $(str) {
 var tagInput = $('input'),
     tagList = $('#tag-list'),
     hobbyInput = $('textarea'),
-    hobbyBtn = $('button'),
+    tagBtn = $('#tag-btn'),
+    hobbyBtn = $('#hobby-btn'),
     hobbyList = $('#hobby-list');
 
 var tagArr = [],
@@ -69,8 +70,8 @@ function render(node, arr) {
     addDelEvent(node, arr);
 }
 
-function showTag() {
-    if (/[\s,;，、；。]+/.test(tagInput.value) || event.keyCode == 13) {
+function showTag(event) {
+    if (/[\s,;，、；。]+/.test(tagInput.value) || event.keyCode == 13 || event.target === tagBtn) {
         var newData = splitInput(tagInput.value);
         if (newData.length === 0) {
             return;
@@ -106,6 +107,7 @@ function showHobby() {
 }
 
 addEventHandler(tagInput, 'keyup', showTag);
+addEventHandler(tagBtn, 'click', showTag);
 addEventHandler(hobbyBtn, 'click', showHobby);
 
 function addDelEvent(node, arr) {
@@ -170,7 +172,7 @@ function fuzzySearch() {
     }
     if (searchInput.length > 0) {
         var tempArr = hobbyArr.map(function(e) {
-            return e.replace(new RegExp(searchInput, 'g'), '<strong>' + searchInput + '</strong>');
+            return e.replace(new RegExp(searchInput, 'gi'), '<strong>$&</strong>');
         });
         render(hobbyList, tempArr);
     }

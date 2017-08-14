@@ -15,15 +15,15 @@
 <body>
     <div class="wraper">
         <div id="alert">tag和爱好最多添加10个爱好，超过的话会把之前添加的挤掉哦，点击相应项即可删除</div>
-        <input type="text" placeholder="在此输入tag">
+        <input type="text" style="width: 320px;" placeholder="在此输入tag，后面跟分隔符或敲回车即可自动添加"><button id="tag-btn">确认添加Tag</button>
         <p>Tags：</p>
         <div id="tag-list"></div>
-        <textarea cols="32" rows="6">HTML,CSS、JavaScript，前端 jQuery Bootatrap; nodejs</textarea>
-        <button>确认爱好</button>
+        <textarea cols="32" rows="6">HTML,CSS、JavaScript，前端 jQuery Bootstrap; nodejs</textarea>
+        <button id="hobby-btn">添加</button>
         <p>爱好：</p>
         <div id="hobby-list"></div>
         <div>
-            <input id="search-input" type="text" placeholder="eg. HTML">
+            <input id="search-input" type="text" placeholder="eg. html">
             <input id="search-btn" type="button" value="搜索爱好">
         </div>
     </div>
