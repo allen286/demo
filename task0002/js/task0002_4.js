@@ -23,8 +23,8 @@ keydownLi();
 //给input标签添加实时监听事件。onchange事件失去焦点后才会触发，在这里使用oninput及Onpropertychange事件
 function addInputListener() {
     if (userInput.addEventListener) { // all browsers except IE before version 9
-        userInput.addEventListener("input", OnInput);
-        userInput.addEventListener("blur", function() {
+        userInput.addEventListener("input", debounce(OnInput, 500));
+        userInput.addEventListener("blur", function () {
             hintUl.style.display = "none"; //隐藏提示列表
         });
     }
@@ -71,13 +71,13 @@ function handleInput(inputValue) {
 //给提示列表里的所有li元素添加mouseover，mouseout，以及click事件
 function clickLi() {
     // console.log("clickLi");
-    delegateEvent(hintUl, "li", "mouseover", function() { //调用util.js中的delegateEvent函数（事件代理）
+    delegateEvent(hintUl, "li", "mouseover", function () { //调用util.js中的delegateEvent函数（事件代理）
         addClass(this, "active");
     });
-    delegateEvent(hintUl, "li", "mouseout", function() {
+    delegateEvent(hintUl, "li", "mouseout", function () {
         removeClass(this, "active");
     });
-    delegateEvent(hintUl, "li", "click", function() {
+    delegateEvent(hintUl, "li", "click", function () {
         userInput.value = deleteSpan(this.innerHTML); //将候选项的值赋给input
         hintUl.style.display = "none"; //隐藏提示列表
     });
@@ -96,7 +96,7 @@ function deleteSpan(string) {
 
 // 给提示列表添加键盘事件
 function keydownLi() {
-    addEvent(userInput, "keydown", function(event) { //调用util.js中的addEvent函数
+    addEvent(userInput, "keydown", function (event) { //调用util.js中的addEvent函数
 
         var highLightLi = document.getElementsByClassName("active")[0];
         var lis = hintUl.getElementsByTagName('li');
@@ -140,4 +140,15 @@ function keydownLi() {
             }
         }
     });
+}
+
+// 增加输入框debounce去抖
+function debounce(fn, delay) {
+    var timer = null;
+    return function (...args) {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+            fn.apply(this, args)
+        }, delay)
+    }
 }

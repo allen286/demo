@@ -14,14 +14,14 @@ window.onload = function () {
     boxParams.left = dragBox.offsetLeft;
     boxParams.top = dragBox.offsetTop;
 
-    document.onmousemove = function (e) {
+    document.onmousemove = throttle(function (e) {
       // 位移数据
       boxParams.moveX = e.clientX - boxParams.initMouseX;
       boxParams.moveY = e.clientY - boxParams.initMouseY;
 
       outBoundary(dragBox, wrapBox, boxParams);
       moveBox(dragBox, boxParams);
-    }
+    }, 50)
 
     document.onmouseup = function (e) {
       //鼠标抬起后清空onmousemove监听
@@ -53,6 +53,18 @@ window.onload = function () {
     }
     if (y > maxY) {
       params.moveY = maxY - params.top;
+    }
+  }
+
+  // 节流，简化版
+  function throttle(fn, time) {
+    var start = 0;
+    return function (...args) {
+      var curr = new Date()
+      if (curr - start > time) {
+        fn.apply(this, args)
+        start = curr
+      }
     }
   }
 
