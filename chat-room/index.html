@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chat Room</title>
+  <style>
+    div {
+      box-sizing: border-box;
+    }
+
+    .notice-area,
+    .chat-area,
+    .send-area {
+      margin-bottom: 20px;
+      border: 1px solid grey;
+      width: 60%
+    }
+
+    #enter-leave {
+      height: 80px;
+      overflow-y: scroll;
+    }
+
+    #msg-zone {
+      height: 360px;
+      overflow-y: scroll;
+    }
+
+    .area-title {
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .send-area,
+    .send-area textarea,
+    .send-area button {
+      vertical-align: middle
+    }
+
+    .send-area button {
+      width: 80px;
+      height: 30px;
+      margin-left: 10px;
+    }
+
+    .enter {
+      color: blue
+    }
+
+    .leave {
+      color: red
+    }
+  </style>
+  <script src="socket.io.js"></script>
+</head>
+
+<body>
+  <div>
+    <div class="notice-area">
+      <div class="area-title">聊天室欢迎您</div>
+      <div id="enter-leave"></div>
+    </div>
+    <div class="chat-area">
+      <div class="area-title">消息记录：</div>
+      <div id="msg-zone"></div>
+    </div>
+    <div class="send-area">
+      <textarea name="" id="send-text" cols="50" rows="4"></textarea>
+      <button id="send-btn">发送</button>
+    </div>
+  </div>
+
+  <script>
+    const socket = io('ws://localhost:8001')
+    let user = 'user' + randomN(4)
+    // 注册用户名
+    socket.emit('register', { user })
+
+    // 监听chatting
+    socket.on('chatting', (data) => {
+      log(data);
+      showMsg(data)
+    });
+
+    // 发送消息
+    sel('#send-btn').onclick = function () {
+      let msg = sel('#send-text').value.trim()
+      msg && socket.emit('chatting', { user, msg })
+    }
+
+    function sel(sel) {
+      return document.querySelector(sel)
+    }
+
+    function log(...args) {
+      console.log.apply(console, args)
+    }
+
+    function showMsg(data) {
+      let div = document.createElement('div')
+      if (data.type === 'chat') {
+        div.innerHTML = `${data.user}：${data.msg}`
+        sel('#msg-zone').appendChild(div)
+        div.scrollIntoView()
+      } else {
+        div.className = data.type
+        div.innerHTML = `${data.user} ${data.type}`
+        sel('#enter-leave').appendChild(div)
+        div.scrollIntoView()
+      }
+    }
+
+    function randomN(n) {
+      var res = ''
+      for (var i = 0; i < n; i++) {
+        res += Math.floor(Math.random() * 10)
+      }
+      return res
+    }
+  </script>
+</body>
+
+</html>

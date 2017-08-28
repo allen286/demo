@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chat Room</title>
+</head>
+
+<body>
+  <div>
+    <input id="send-text" type="text">
+    <button id="send-btn">发送</button>
+    <div id="enter-leave"></div>
+    <div id="msg-zone"></div>
+  </div>
+  <script>
+    function sel(sel) {
+      return document.querySelector(sel)
+    }
+
+    function log(...args) {
+      console.log.apply(console, args)
+    }
+
+    function showMsg(msg) {
+      var div = document.createElement('div')
+      div.innerHTML = msg.text
+      if (msg.type === 'message') {
+        sel('#msg-zone').appendChild(div)
+      } else {
+        sel('#enter-leave').appendChild(div)
+      }
+    }
+
+    var ws = new WebSocket('ws://localhost:8001/')
+    ws.onopen = function () {
+      log('ws open')
+      sel('#send-btn').onclick = function () {
+        var text = sel('#send-text').value.trim()
+        text && ws.send(text)
+      }
+    }
+
+    ws.onclose = function () {
+      log('ws closed')
+    }
+
+    ws.onmessage = function (e) {
+      try {
+        var msg = JSON.parse(e.data)
+        showMsg(msg)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  </script>
+</body>
+
+</html>

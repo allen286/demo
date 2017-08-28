@@ -21,7 +21,9 @@
 
 [添加，删除及搜索标签](http://allen286.github.io/demo/task21/)     
 
-[表单校验](http://allen286.github.io/demo/task30/)  
+[表单校验及提示](http://allen286.github.io/demo/task30/)  
+
+[WebSocket多人聊天室](https://github.com/allen286/demo/tree/master/chat-room)  
 
 ### 算法
 
